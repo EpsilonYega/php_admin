@@ -1,0 +1,13 @@
+body {
+    background-color: #212529;
+}
+.content {
+    margin-top: 10rem;
+    text-align: center;
+}
+p {
+    color: white;
+}
+.users {
+    margin-top: 1rem;
+}
