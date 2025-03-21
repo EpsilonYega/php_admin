@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<form action="/create_user" method="POST">
+<form action="/create_user" method="POST" enctype="multipart/form-data">
   @csrf
   <div class="form-group">
     <label for="inputFullname">ФИО пользователя</label>
@@ -37,7 +37,36 @@
     <input type="password" class="form-control" id="inputPassword" aria-describedby="inputPassword" placeholder="Пароль" name="inputPassword">
     <small id="inputPasswordSmall" class="form-text text-muted">500 internal server error.</small>
   </div>
-  <p>Возможно дальнейшее прикрепление фото.</p>
+  <div>
+    <div class="mb-4 d-flex justify-content-center">
+        <img id="selectedImage" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
+        alt="example placeholder" style="width: 300px;" />
+    </div>
+    <div class="d-flex justify-content-center">
+      <div data-mdb-ripple-init class="btn btn-primary btn-rounded">
+        <label class="form-label text-white m-1" for="customFile1">Выбрать файл</label>
+        <input type="file" class="form-control d-none" id="customFile1" name="customFile1" onchange="displaySelectedImage(event, 'selectedImage')" />
+    </div>
+    
+    <img id="selectedImage" src="" alt="Загруженное изображение" class="img-fluid mt-3 d-none" />
+    
+    <script>
+        function displaySelectedImage(event, imageId) {
+            const file = event.target.files[0];
+            const imageElement = document.getElementById(imageId);
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imageElement.src = e.target.result; 
+                    imageElement.classList.remove('d-none'); 
+                }
+                reader.readAsDataURL(file); 
+            }
+        }
+      </script>
+    </div>
+  </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 @endsection

@@ -11,14 +11,10 @@ Route::post('/create_user', [MainController::class, 'admin_create_user']);
 
 Route::get('/users', [MainController::class, 'admin_get_users']);
 
-Route::get('/user_info', [MainController::class, 'admin_user_card']);
+Route::get('/user_info/{login}', [MainController::class, 'admin_user_card']);
 
-Route::get('/info', [MainController::class, 'admin_get_user']);
+Route::get('/delete/{login}', [MainController::class, 'admin_drop_user']);
 
-// Route::post('/delete', [MainController::class, 'admin_drop_user']);
+Route::get('/update_page/{login}', [MainController::class, 'admin_update_user_page']);
 
-Route::get('/delete', [MainController::class, 'admin_drop_user']);
-
-Route::get('/update_page', [MainController::class, 'admin_update_user_page']);
-
-Route::post('/update', [MainController::class, 'admin_update_user']);
+Route::post('/update/{data}', [MainController::class, 'admin_update_user']);
